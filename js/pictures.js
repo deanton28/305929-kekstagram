@@ -33,4 +33,19 @@ for (var i = 0; i < 25; i++) {
   };
 }
 
-console.log(pictures)
+var pictureTemplate = document.querySelector('#picture-template').content;
+
+var fragment = document.createDocumentFragment();
+
+for (var p = 0; p < pictures.length; p++) {
+  var picture = pictureTemplate.cloneNode(true);
+
+  picture.querySelector('img').setAttribute('src', pictures[p].url);
+  picture.querySelector('.picture-likes').textContent = pictures[p].likes;
+  picture.querySelector('.picture-comments').textContent = pictures[p].comments.length;
+
+  fragment.appendChild(picture);
+}
+
+var picturesContainer = document.querySelector('.pictures');
+picturesContainer.appendChild(fragment);
